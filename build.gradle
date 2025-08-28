@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id("xyz.jpenilla.run-paper") version "2.3.1"
+    id 'com.gradleup.shadow' version '8.3.3'
 }
 
 group = 'me.marensovich'
@@ -8,6 +9,7 @@ version = '1.0'
 
 repositories {
     mavenCentral()
+    maven { url = "https://repo.codemc.org/repository/maven-public/" }
     maven {
         name = "papermc-repo"
         url = "https://repo.papermc.io/repository/maven-public/"
@@ -16,13 +18,12 @@ repositories {
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21-R0.1-SNAPSHOT")
+    compileOnly "dev.jorel:commandapi-bukkit-core:10.1.2"
+    implementation "dev.jorel:commandapi-bukkit-shade:10.1.2"
 }
 
 tasks {
     runServer {
-        // Configure the Minecraft version for our task.
-        // This is the only required configuration besides applying the plugin.
-        // Your plugin's jar (or shadowJar if present) will be used automatically.
         minecraftVersion("1.21")
     }
 }
@@ -43,6 +44,10 @@ tasks.withType(JavaCompile).configureEach {
     if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
         options.release.set(targetJavaVersion)
     }
+}
+
+shadowJar {
+    relocate("dev.jorel.commandapi", "me.marensovich.bestCheck.libs.commandapi")
 }
 
 processResources {
