@@ -1,0 +1,7 @@
+name: BestCheck
+version: '1.0'
+main: me.marensovich.bestCheck.BestCheck
+api-version: '1.21'
+prefix: BestCheck
+authors: [ marensovich ]
+description: A simple and functional plugin for checking players
