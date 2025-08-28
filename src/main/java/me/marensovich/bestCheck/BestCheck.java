@@ -2,34 +2,48 @@ package me.marensovich.bestCheck;
 
 import dev.jorel.commandapi.CommandAPI;
 import dev.jorel.commandapi.CommandAPIBukkitConfig;
-import dev.jorel.commandapi.CommandAPICommand;
+import lombok.Getter;
+import me.marensovich.bestCheck.Commands.CheckCommand;
+import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.io.File;
+import java.io.IOException;
 
 
 public class BestCheck extends JavaPlugin {
 
-    private static BestCheck instance;
-    public static BestCheck getInstance() {
-        return instance;
-    }
+    @Getter private static BestCheck instance;
 
-    private FileConfiguration config;
-    public FileConfiguration getConfig() {
-        return config;
-    }
+    @Getter private FileConfiguration config;
+
+    private File messageFile;
+    @Getter private FileConfiguration messageConfig;
 
     @Override
     public void onLoad() {
         CommandAPI.onLoad(new CommandAPIBukkitConfig(this).verboseOutput(true));
-        new CommandAPICommand("ping")
-                .executes((sender, args) -> {
-                    sender.sendMessage("pong!");
-                }).register();
     }
+
+    // TODO Вынести работы с конфигами в отдельные методы
 
     @Override
     public void reloadConfig() {
+        if (messageFile == null) {
+            messageFile = new File(getDataFolder(), "message.yml");
+        }
+        if (!messageFile.exists()) {
+            saveResource("message.yml", false);
+        }
+        messageConfig = new YamlConfiguration();
+        try {
+            messageConfig.load(messageFile);
+        } catch (IOException | InvalidConfigurationException e) {
+            getLogger().severe("Failed to load message.yml!");
+            e.printStackTrace();
+        }
         super.reloadConfig();
         this.config = super.getConfig();
     }
@@ -40,6 +54,8 @@ public class BestCheck extends JavaPlugin {
         reloadConfig();
 
         CommandAPI.onEnable();
+
+        CheckCommand.registerCommands();
 
         getLogger().info("BestCheck plugin enabled");
 
