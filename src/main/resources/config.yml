@@ -1,0 +1,10 @@
+# database settings
+database:
+  # mysql/sqlite
+  type: sqlite
+  # mysql settings
+  username: username
+  password: password
+  url: jdbc:mysql://username:password@ip:port/database
+
+
