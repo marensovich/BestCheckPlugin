@@ -7,8 +7,8 @@ import me.marensovich.bestCheck.Commands.CheckCommand;
 import me.marensovich.bestCheck.Configs.DefaultConfig;
 import me.marensovich.bestCheck.Configs.MessageConfig;
 import me.marensovich.bestCheck.Database.DatabaseManager;
-import me.marensovich.bestCheck.Database.MySQLManager;
-import me.marensovich.bestCheck.Database.SQLiteManager;
+import me.marensovich.bestCheck.Database.Managers.MySQLManager;
+import me.marensovich.bestCheck.Database.Managers.SQLiteManager;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 

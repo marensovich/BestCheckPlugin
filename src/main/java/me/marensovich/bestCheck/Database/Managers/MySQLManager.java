@@ -1,6 +1,7 @@
-package me.marensovich.bestCheck.Database;
+package me.marensovich.bestCheck.Database.Managers;
 
 import me.marensovich.bestCheck.BestCheck;
+import me.marensovich.bestCheck.Database.DatabaseManager;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
