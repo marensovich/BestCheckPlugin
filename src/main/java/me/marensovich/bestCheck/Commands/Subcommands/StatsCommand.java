@@ -1,7 +1,11 @@
 package me.marensovich.bestCheck.Commands.Subcommands;
 
 import dev.jorel.commandapi.CommandAPICommand;
-import dev.jorel.commandapi.arguments.StringArgument;
+import me.marensovich.bestCheck.BestCheck;
+import org.bukkit.ChatColor;
+
+import java.util.List;
+import java.util.Objects;
 
 public class StatsCommand {
 
@@ -11,7 +15,13 @@ public class StatsCommand {
                 .withPermission("check.stats")
                 .withUsage("/check stats")
                 .executes((sender, args) -> {
-                    sender.sendMessage("/check stats command text");
+                    List<String> message = BestCheck.getInstance().getMessageConfigManager().getMessageConfig().getStringList("stats-command");
+                    for(String s : message){
+                        sender.sendMessage(
+                                ChatColor.translateAlternateColorCodes('&',
+                                        Objects.requireNonNull(BestCheck.getInstance().getMessageConfigManager().getMessageConfig().getString("plugin-prefix"))) +
+                                ChatColor.translateAlternateColorCodes('&', s));
+                    }
                 });
     }
 }

@@ -1,0 +1,31 @@
+plugin-prefix: "&f[&cBestCheck&f] "
+
+# /check message
+check-message:
+  - "&a===================="
+  - "&eИнформация о плагине"
+  - "&a===================="
+
+# /check help message
+help-message:
+  - "&a===================="
+  - "&eПомощь по плагину"
+  - "&a===================="
+
+# /check reload message
+reload-message: "&ePlugin has been successfully reloaded"
+
+
+# Placeholders:
+#
+#
+#
+#
+#
+#
+#
+# /check stats <args> message
+stats-command:
+  - "&a===================="
+  - "&eСтатистика плагина"
+  - "&a===================="
