@@ -6,6 +6,9 @@ import lombok.Getter;
 import me.marensovich.bestCheck.Commands.CheckCommand;
 import me.marensovich.bestCheck.Configs.DefaultConfig;
 import me.marensovich.bestCheck.Configs.MessageConfig;
+import me.marensovich.bestCheck.Database.DatabaseManager;
+import me.marensovich.bestCheck.Database.MySQLManager;
+import me.marensovich.bestCheck.Database.SQLiteManager;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -17,6 +20,8 @@ public class BestCheck extends JavaPlugin {
 
     @Getter private DefaultConfig configManager;
     @Getter private MessageConfig messageConfigManager;
+
+    @Getter private DatabaseManager databaseManager;
 
     @Override
     public void onLoad() {
@@ -42,11 +47,28 @@ public class BestCheck extends JavaPlugin {
 
         CommandAPI.onEnable();
         CheckCommand.registerCommands();
+
+        switch (getConfigManager().getConfig().getString("database.type").toLowerCase()) {
+            case "mysql" -> {
+                databaseManager = new MySQLManager();
+            }
+            case "sqlite" -> {
+                databaseManager = new SQLiteManager();
+            }
+            default -> {
+                getLogger().severe("Invalid database type! Plugin disabled!");
+                getServer().getPluginManager().disablePlugin(this);
+            }
+        }
+        databaseManager.connect();
         getLogger().info("BestCheck plugin enabled");
     }
 
     @Override
     public void onDisable() {
+        if (databaseManager != null) {
+            databaseManager.disconnect();
+        }
         CommandAPI.onDisable();
         getLogger().info("Plugin has been disabled!");
     }

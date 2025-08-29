@@ -21,6 +21,9 @@ dependencies {
     compileOnly "dev.jorel:commandapi-bukkit-core:10.1.2"
     implementation "dev.jorel:commandapi-bukkit-shade:10.1.2"
 
+    compileOnly("org.xerial:sqlite-jdbc:3.50.3.0")
+    compileOnly("com.mysql:mysql-connector-j:9.4.0")
+
     compileOnly("org.projectlombok:lombok:1.18.38")
     annotationProcessor("org.projectlombok:lombok:1.18.38")
 }
