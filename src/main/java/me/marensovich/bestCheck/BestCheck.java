@@ -6,11 +6,17 @@ import lombok.Getter;
 import me.marensovich.bestCheck.Commands.CheckCommand;
 import me.marensovich.bestCheck.Configs.DefaultConfig;
 import me.marensovich.bestCheck.Configs.MessageConfig;
+import me.marensovich.bestCheck.Configs.WhitelistConfig;
 import me.marensovich.bestCheck.Database.DatabaseManager;
 import me.marensovich.bestCheck.Database.Managers.MySQLManager;
 import me.marensovich.bestCheck.Database.Managers.SQLiteManager;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.List;
+import java.util.Objects;
 
 public class BestCheck extends JavaPlugin {
 
@@ -20,6 +26,7 @@ public class BestCheck extends JavaPlugin {
 
     @Getter private DefaultConfig configManager;
     @Getter private MessageConfig messageConfigManager;
+    @Getter private WhitelistConfig whitelistConfigManager;
 
     @Getter private DatabaseManager databaseManager;
 
@@ -36,6 +43,9 @@ public class BestCheck extends JavaPlugin {
         if (messageConfigManager != null) {
             messageConfigManager.reload();
         }
+        if (whitelistConfigManager != null) {
+            whitelistConfigManager.reload();
+        }
     }
 
     @Override
@@ -44,6 +54,7 @@ public class BestCheck extends JavaPlugin {
 
         this.configManager = new DefaultConfig(this);
         this.messageConfigManager = new MessageConfig(this);
+        this.whitelistConfigManager = new WhitelistConfig(this);
 
         CommandAPI.onEnable();
         CheckCommand.registerCommands();

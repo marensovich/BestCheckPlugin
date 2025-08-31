@@ -23,6 +23,7 @@ public class SQLiteManager implements DatabaseManager {
             String url = "jdbc:sqlite:" + dbFile.getAbsolutePath();
             connection = DriverManager.getConnection(url);
             BestCheck.getInstance().getLogger().info("Connected to SQLite!");
+            checkTables();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -52,5 +53,22 @@ public class SQLiteManager implements DatabaseManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    private void checkTables(){
+        String checksTable = """
+        CREATE TABLE IF NOT EXISTS checks (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            admin TEXT NOT NULL,
+            adminUUID TEXT NOT NULL,
+            player TEXT NOT NULL,
+            playerUUID TEXT NOT NULL,
+            time DATETIME NOT NULL,
+            status TEXT NOT NULL,
+            result TEXT NOT NULL
+        )
+        """;
+
+        executeQuery(checksTable);
     }
 }

@@ -17,6 +17,7 @@ public class CheckCommand {
                 .withSubcommand(StatsCommand.statsCommand())
                 .withSubcommand(RunCommand.runCommand())
                 .withSubcommand(StopCommand.stopCommand())
+                .withSubcommand(WhitelistCommand.whitelistCommand())
                 .withHelp("Main command", "The main command of the plugin")
                 .withPermission("check.check")
                 .executes(((sender, args) -> {

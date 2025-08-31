@@ -29,3 +29,50 @@ stats-command:
   - "&a===================="
   - "&eСтатистика плагина"
   - "&a===================="
+
+# /check whitelist message
+whitelist-message:
+  - "&a===================="
+  - "&eИнформация по whitelist"
+  - "&a===================="
+
+
+whitelist-add-player-exists:
+  - "&a===================="
+  - "&eПользователь уже существует"
+  - "&a===================="
+
+# /check whitelist add message
+whitelist-add-message:
+  - "&a===================="
+  - "&eПользователь %player% (%uuid%) успешно добавлен"
+  - "&a===================="
+
+whitelist-remove-player-not-exists:
+  - "&a===================="
+  - "&eПользователь уже существует"
+  - "&a===================="
+
+# /check whitelist remove message
+whitelist-remove-message:
+  - "&a===================="
+  - "&eПользователь %player% (%uuid%) успешно удален"
+  - "&a===================="
+
+# /check whitelist clear message
+whitelist-clear-message:
+  - "&a===================="
+  - "&eСписок успешно очищен"
+  - "&a===================="
+
+# /check whitelist check message
+whitelist-check-true-message:
+  - "&a===================="
+  - "&eПользователь %player% находится в whitelist"
+  - "&a===================="
+
+# /check whitelist check message
+whitelist-check-false-message:
+  - "&a===================="
+  - "&eПользователь %player% отсутствует в whitelist"
+  - "&a===================="
