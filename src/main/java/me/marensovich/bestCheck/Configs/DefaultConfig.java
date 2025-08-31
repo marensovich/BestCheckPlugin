@@ -1,6 +1,5 @@
 package me.marensovich.bestCheck.Configs;
 
-
 import lombok.Getter;
 import me.marensovich.bestCheck.BestCheck;
 import org.bukkit.configuration.file.FileConfiguration;

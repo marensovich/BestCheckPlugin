@@ -12,13 +12,8 @@ import me.marensovich.bestCheck.Database.Managers.MySQLManager;
 import me.marensovich.bestCheck.Database.Managers.SQLiteManager;
 import me.marensovich.bestCheck.Listeners.PlayerMoveEventListener;
 import me.marensovich.bestCheck.Managers.CheckManager;
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.List;
-import java.util.Objects;
 
 public class BestCheck extends JavaPlugin {
 
