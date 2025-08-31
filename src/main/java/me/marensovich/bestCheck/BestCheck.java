@@ -10,6 +10,8 @@ import me.marensovich.bestCheck.Configs.WhitelistConfig;
 import me.marensovich.bestCheck.Database.DatabaseManager;
 import me.marensovich.bestCheck.Database.Managers.MySQLManager;
 import me.marensovich.bestCheck.Database.Managers.SQLiteManager;
+import me.marensovich.bestCheck.Listeners.PlayerMoveEventListener;
+import me.marensovich.bestCheck.Managers.CheckManager;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -29,6 +31,8 @@ public class BestCheck extends JavaPlugin {
     @Getter private WhitelistConfig whitelistConfigManager;
 
     @Getter private DatabaseManager databaseManager;
+
+    @Getter private CheckManager checkManager;
 
     @Override
     public void onLoad() {
@@ -52,12 +56,15 @@ public class BestCheck extends JavaPlugin {
     public void onEnable() {instance = this;
         saveDefaultConfig();
 
+
+        this.checkManager = new CheckManager();
         this.configManager = new DefaultConfig(this);
         this.messageConfigManager = new MessageConfig(this);
         this.whitelistConfigManager = new WhitelistConfig(this);
 
         CommandAPI.onEnable();
         CheckCommand.registerCommands();
+        registerEvents();
 
         switch (getConfigManager().getConfig().getString("database.type").toLowerCase()) {
             case "mysql" -> {
@@ -73,6 +80,10 @@ public class BestCheck extends JavaPlugin {
         }
         databaseManager.connect();
         getLogger().info("BestCheck plugin enabled");
+    }
+
+    private void registerEvents(){
+        getServer().getPluginManager().registerEvents(new PlayerMoveEventListener(), this);
     }
 
     @Override

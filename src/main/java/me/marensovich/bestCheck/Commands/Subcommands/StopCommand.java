@@ -1,6 +1,8 @@
 package me.marensovich.bestCheck.Commands.Subcommands;
 
 import dev.jorel.commandapi.CommandAPICommand;
+import me.marensovich.bestCheck.BestCheck;
+import org.bukkit.entity.Player;
 
 public class StopCommand {
 
@@ -10,7 +12,11 @@ public class StopCommand {
                 .withPermission("check.stop")
                 .withUsage("/check stop")
                 .executes((sender, args) -> {
-                    sender.sendMessage("/check stop command text");
+                    if (BestCheck.getInstance().getCheckManager().isFrozen((Player) sender)){
+                        BestCheck.getInstance().getCheckManager().unfreezePlayer((Player) sender);
+                        sender.clearTitle();
+                        ((Player) sender).clearActivePotionEffects();
+                    }
                 });
     }
 }

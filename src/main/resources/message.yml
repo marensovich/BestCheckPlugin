@@ -1,5 +1,10 @@
 plugin-prefix: "&f[&cBestCheck&f] "
 
+
+notification:
+  title: "Вы вызваны на проверку"
+  subtitle: "Свяжитесь с администратором"
+
 # /check message
 check-message:
   - "&a===================="
@@ -75,4 +80,21 @@ whitelist-check-true-message:
 whitelist-check-false-message:
   - "&a===================="
   - "&eПользователь %player% отсутствует в whitelist"
+  - "&a===================="
+
+
+check-run-player-in-whitelist:
+  - "&a===================="
+  - "&eВы не можете вызвать игрока %player% на проверку"
+  - "&eОн находиться в WhiteList"
+  - "&a===================="
+
+check-run-player-yourself:
+  - "&a===================="
+  - "&eВы не можете вызвать самого себя на проверку"
+  - "&a===================="
+  -
+check-run-player-offline:
+  - "&a===================="
+  - "&eИгрок оффлайн"
   - "&a===================="
