@@ -11,7 +11,7 @@ public enum CheckStatus {
         this.value = value;
     }
 
-    public String getStatus(String str) {
+    public String getStatus() {
         return value;
     }
 

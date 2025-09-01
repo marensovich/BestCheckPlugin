@@ -4,6 +4,8 @@ import dev.jorel.commandapi.CommandAPICommand;
 import dev.jorel.commandapi.arguments.PlayerArgument;
 import dev.jorel.commandapi.arguments.SafeSuggestions;
 import me.marensovich.bestCheck.BestCheck;
+import me.marensovich.bestCheck.Database.Managers.MySQLManager;
+import me.marensovich.bestCheck.Database.Managers.SQLiteManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.title.Title;
 import org.bukkit.Bukkit;
@@ -12,6 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.sql.SQLException;
 import java.time.Duration;
 import java.util.List;
 import java.util.Objects;
@@ -82,6 +85,27 @@ public class RunCommand {
                             )
                     );
                     player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, Integer.MAX_VALUE, 3));
+
+                    switch (BestCheck.getInstance().getConfigManager().getConfig().getString("database.type").toLowerCase()) {
+                        case "mysql" -> {
+                            try {
+                                MySQLManager.createCheckData(admin.getName(), admin.getUniqueId().toString(), player.getName(), player.getUniqueId().toString());
+                            } catch (SQLException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                        case "sqlite" -> {
+                            try {
+                                SQLiteManager.createCheckData(admin.getName(), admin.getUniqueId().toString(), player.getName(), player.getUniqueId().toString());
+                            } catch (SQLException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                        default -> {
+
+                        }
+                    }
+
                 });
     }
 }

@@ -3,7 +3,8 @@ package me.marensovich.bestCheck.Data;
 public enum CheckResult {
 
     BANNED("banned"),
-    RELEASED("released"),;
+    RELEASED("released"),
+    WAITING("wait");
 
     private final String value;
 
@@ -11,7 +12,7 @@ public enum CheckResult {
         this.value = value;
     }
 
-    public String getResult(String str) {
+    public String getResult() {
         return value;
     }
 
