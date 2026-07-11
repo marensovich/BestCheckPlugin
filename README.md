@@ -1,33 +1,37 @@
-# 🔍 BestCheckPlugin
+# BestCheckPlugin
 
-A Minecraft plugin for **server administrators** to check and verify players with database logging.
+Инструмент модерации для Minecraft-серверов. Даёт персоналу структурированный процесс проверки игроков на нарушения с полным логированием в MySQL или SQLite.
 
-## 📋 Description
+## Для чего
 
-Provides staff with tools to conduct player checks (anti-cheat investigations). Supports both MySQL and SQLite for logging check history, making it suitable for servers of any size.
+На крупных серверах проверки подозрительных игроков — ежедневная работа. BestCheckPlugin её структурирует: фиксирует кто проверял, когда и с каким результатом. История доступна для разбора конфликтных ситуаций.
 
-## 🛠️ Tech Stack
+## База данных
 
-- **Java** — core language
-- **Bukkit / Paper API** — Minecraft plugin framework (1.21)
-- **MySQL** — production database
-- **SQLite** — lightweight alternative database
-- **mysql-connector-j / sqlite-jdbc** — JDBC drivers
+Выбирается в `config.yml`:
 
-## ✨ Features
+| Тип | Когда подходит |
+|-----|----------------|
+| **MySQL** | Продакшн, несколько серверов, централизованный лог |
+| **SQLite** | Тесты, маленький сервер, без внешней БД |
 
-- Player check system for administrators
-- MySQL and SQLite database support
-- Check history logging
-- Configurable check workflows
-- CheckCommand with rich feedback
-- Compatible with modern Paper 1.21
+## Права
 
-## 🚀 Installation
+- `bestcheck.check` — проводить проверки
+- `bestcheck.admin` — управление и полный доступ к истории
 
-1. Place JAR in `plugins/` folder
-2. Configure database in `config.yml` (MySQL or SQLite)
-3. Restart server
-4. Assign permissions to admin staff
+## Установка
 
-> Requires: Paper 1.21+
+1. Скопируйте `.jar` в `plugins/`
+2. Перезапустите сервер — создастся `config.yml`
+3. Укажите тип БД и параметры подключения
+4. Назначьте права нужным группам
+
+## Стек
+
+- **Java** + **Bukkit / Paper 1.21**
+- **MySQL** / **SQLite** через JDBC (`mysql-connector-j` / `sqlite-jdbc`)
+
+---
+
+**Автор:** [@marensovich](https://github.com/marensovich)
